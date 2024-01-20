@@ -1,0 +1,24 @@
+trigger AccountTrigger on Account (before insert, before update, before delete, after insert) {
+ if(trigger.isAfter){
+    
+        if(trigger.isInsert){
+            accclass.afterInsertacc(trigger.new);
+        }
+        
+    
+}
+}
+
+
+
+
+----------------------------------
+ public static void beforeUpdateacc(list<account> ac){
+        for(account act : ac)
+        {
+            if(act.phone != null)
+            {
+                act.phone.adderror('Phone Field Not Editable');
+            }
+        }
+    }
