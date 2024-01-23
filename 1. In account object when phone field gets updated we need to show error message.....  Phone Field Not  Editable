@@ -13,12 +13,16 @@ trigger AccountTrigger on Account (before insert, before update, before delete, 
 
 
 ----------------------------------
- public static void beforeUpdateacc(list<account> ac){
+    public static void beforeUpdateacc(list<account> ac, list<account> oldac){
         for(account act : ac)
+            
         {
-            if(act.phone != null)
+            for(account acold : oldac){
+               if(act.phone != acold.phone)
             {
                 act.phone.adderror('Phone Field Not Editable');
-            }
+            } 
+            }  
+            
         }
     }
