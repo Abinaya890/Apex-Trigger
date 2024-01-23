@@ -1,0 +1,22 @@
+ public static void caseafterinsert(list<case> cb) {
+        list<task> ct = new list<task>();
+            for(case cc : cb)
+            {
+                if(cc.Origin == 'Web')
+                {
+                    task tk = new task();
+                    tk.Subject = 'math';
+                    tk.WhatId = cc.Id;
+                    ct.add(tk);
+                } 
+                insert ct;
+            }
+            }
+
+----------------------------------------
+
+    if(trigger.isAfter){
+        if(trigger.isInsert){
+            caseclass.caseafterinsert(trigger.new);
+        }
+    }
