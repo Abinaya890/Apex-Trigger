@@ -1,0 +1,62 @@
+public class conclass {
+    public static void aftercon(list<contact> ca){
+        set<id> acc = new set<id>();
+          for(Contact con:ca){
+            if(con.AccountId != null){
+                acc.add(con.AccountId);
+            }
+        }
+         if(!acc.isEmpty()){
+        List<Account> accList = [SELECT Id, No_of_Contact__c, (SELECT Id FROM Contacts) 
+                                 FROM Account WHERE Id IN : acc];
+        if(!accList.isEmpty()){
+            List<Account> updateAccList = new List<Account>();
+            for(Account ac:accList){
+                Account objAcc = new Account(Id = ac.Id, No_of_Contact__c = ac.Contacts.size());
+                updateAccList.add(objAcc);
+            }
+            if(!updateAccList.isEmpty()){
+                update updateAccList;
+            }
+        }
+         }
+       
+        }
+  public static void afterUpdate(List<contact> contacts, Map<Id,Contact> conMap){
+
+        set<id> accIds = new set<id>();
+
+        for(Contact c: contacts){
+
+            if(c.AccountId != conMap.get(c.Id).AccountId){
+
+                accIds.add(c.AccountId);
+
+                accIds.add(conMap.get(c.Id).AccountId);
+
+            } 
+
+        }
+   
+
+    }
+    
+     public static void afterDelete(List<contact> contacts){
+
+        set<id> accIds = new set<id>();
+
+        for(Contact c: contacts){
+
+            if(c.AccountId != null){
+
+                accIds.add(c.AccountId);
+
+            } 
+
+        }
+
+     
+
+    }
+    
+}
