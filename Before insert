@@ -1,5 +1,5 @@
 trigger acctrigger on Account (before insert) {
     for(account ac : trigger.new){
-      
+        ac.name = ac.name + ' pvt ltd';
     }
 }
